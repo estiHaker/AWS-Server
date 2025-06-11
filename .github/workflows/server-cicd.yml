@@ -30,4 +30,4 @@ jobs:
           script: |
             cd /home/ubuntu/AWS-Server
             npm install
-            pm2 restart server || pm2 start index.js --name server
+            pm2 restart server || pm2 start server.js --name server
