@@ -1,33 +1,33 @@
-name: Deploy Server to EC2
+# name: Deploy Server to EC2
 
-on:
-  push:
-    branches: [ "master" ]
+# on:
+#   push:
+#     branches: [ "master" ]
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v3
 
-      - name: Copy server to EC2
-        uses: appleboy/scp-action@v0.1.4
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ubuntu
-          key: ${{ secrets.EC2_SSH_KEY }}
-          source: "."
-          target: "/home/ubuntu/AWS-Server"
+#       - name: Copy server to EC2
+#         uses: appleboy/scp-action@v0.1.4
+#         with:
+#           host: ${{ secrets.EC2_HOST }}
+#           username: ubuntu
+#           key: ${{ secrets.EC2_SSH_KEY }}
+#           source: "."
+#           target: "/home/ubuntu/AWS-Server"
 
-      - name: Run server on EC2
-        uses: appleboy/ssh-action@v1.0.0
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ubuntu
-          key: ${{ secrets.EC2_SSH_KEY }}
-          script: |
-            cd /home/ubuntu/AWS-Server
-            npm install
-            pm2 restart server || pm2 start server.js --name server
+#       - name: Run server on EC2
+#         uses: appleboy/ssh-action@v1.0.0
+#         with:
+#           host: ${{ secrets.EC2_HOST }}
+#           username: ubuntu
+#           key: ${{ secrets.EC2_SSH_KEY }}
+#           script: |
+#             cd /home/ubuntu/AWS-Server
+#             npm install
+#             pm2 restart server || pm2 start server.js --name server
